@@ -10,12 +10,13 @@ import org.springframework.context.annotation.Bean;
 import sn.unchk.librarymanagement.domain.models.member.MemberRole;
 import sn.unchk.librarymanagement.presentation.dto.request.MemberRequest;
 import sn.unchk.librarymanagement.presentation.security.RsaKeyProperties;
+import sn.unchk.librarymanagement.presentation.security.SecurityConfigProperties;
 import sn.unchk.librarymanagement.presentation.security.token.TokenProperties;
 import sn.unchk.librarymanagement.service.member.MemberService;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-@EnableConfigurationProperties({RsaKeyProperties.class, TokenProperties.class})
+@EnableConfigurationProperties({RsaKeyProperties.class, TokenProperties.class, SecurityConfigProperties.class})
 @Slf4j
 public class LibraryManagementApplication {
     public static final String ADMIN_USERNAME = "diack";
