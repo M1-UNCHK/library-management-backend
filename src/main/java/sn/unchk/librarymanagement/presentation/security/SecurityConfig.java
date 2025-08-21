@@ -29,6 +29,8 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
 
@@ -36,14 +38,11 @@ import java.util.Arrays;
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
-public class SecurityConfig {
-   @Value("${security.url.authorized}")
-   private  String urlsAuthorized;
-
-   private final CustomUserDetailsService userDetailsService;
-   private final CustomAuthenticationEntryPoint authenticationEntryPoint;
-   private final PasswordEncoder passwordEncoder;
-   private final RsaKeyProperties rsaKeyProperties;
+public class SecurityConfig implements WebMvcConfigurer {
+    private final SecurityConfigProperties securityConfigProperties;
+    private final CustomUserDetailsService userDetailsService;
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
+    private final PasswordEncoder passwordEncoder;
 
    @Bean
    public GrantedAuthorityDefaults getGrantedAuthorityDefaults() {
@@ -62,7 +61,7 @@ public class SecurityConfig {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(auth ->
-                  auth.requestMatchers(Arrays.stream(urlsAuthorized.split(","))
+                  auth.requestMatchers(Arrays.stream(securityConfigProperties.getUrl().getAuthorized().split(","))
                                   .map(String::trim).toArray(String[]::new))
                           .permitAll()
                           .anyRequest().authenticated()
@@ -83,13 +82,23 @@ public class SecurityConfig {
 
     @Bean
     public JwtEncoder jwtEncoder() {
-        JWK jwk = new RSAKey.Builder(rsaKeyProperties.publicKey()).privateKey(rsaKeyProperties.privateKey()).build();
+        JWK jwk = new RSAKey
+                .Builder(securityConfigProperties.getRsa().getPublicKey())
+                .privateKey(securityConfigProperties.getRsa().getPrivateKey())
+                .build();
         JWKSource<SecurityContext> jwkSource = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwkSource);
     }
 
     @Bean
     JwtDecoder jwtDecoder() {
-       return NimbusJwtDecoder.withPublicKey(rsaKeyProperties.publicKey()).build();
+       return NimbusJwtDecoder.withPublicKey(securityConfigProperties.getRsa().getPublicKey()).build();
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins(securityConfigProperties.getCors().getAllowedOrigins())
+                .allowedMethods(securityConfigProperties.getCors().getAllowedMethods());
     }
 }
