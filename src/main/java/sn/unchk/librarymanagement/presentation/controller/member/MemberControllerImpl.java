@@ -22,9 +22,8 @@ import static sn.unchk.librarymanagement.constant.GlobalConstant.*;
 
 @RestController
 public class MemberControllerImpl implements MemberController {
-    public static final String ENTITY = "Member";
+    private static final String ENTITY = "Member";
     private final MemberService memberService;
-
     private final RequestValidator validator;
 
     public MemberControllerImpl(MemberService memberService, RequestValidator validator) {

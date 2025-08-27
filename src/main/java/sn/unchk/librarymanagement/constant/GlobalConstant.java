@@ -19,8 +19,7 @@ public class GlobalConstant {
 
     //Base Route Constant
     public static final String AUTH_BASE_ROUTE = "/oauth";
-    public static final String UNIT_BASE_ROUTE = "/units";
-    public static final String COUNTRY_BASE_ROUTE = "/countries";
-    public static final String CITY_BASE_ROUTE = "/cities";
     public static final String MEMBER_BASE_ROUTE = "/members";
+    public static final String BOOK_BASE_ROUTE = "/books";
+
 }
