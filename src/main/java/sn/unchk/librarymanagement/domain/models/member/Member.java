@@ -1,5 +1,6 @@
 package sn.unchk.librarymanagement.domain.models.member;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -52,6 +53,7 @@ public abstract class Member extends BaseModel {
 
     @Column(nullable = false)
     @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
+    @JsonIgnore
     private String password;
 
     @Column(nullable = false)

@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.List;
 
 @ConfigurationProperties("security")
 @Getter @Setter
@@ -21,8 +22,8 @@ public class SecurityConfigProperties {
 
     @Getter @Setter
     public static class CorsProperties {
-        private String allowedOrigins;
-        private String allowedMethods;
+        private List<String> allowedOrigins;
+        private List<String> allowedMethods;
     }
 
     @Getter @Setter
