@@ -11,6 +11,7 @@ public record CategoryResponse(
         UUID id,
         String code,
         String name,
+        String description,
         @JsonFormat(pattern = Pattern.DATE)
         LocalDateTime createdAt,
         @JsonFormat(pattern = Pattern.DATE)
@@ -23,6 +24,7 @@ public record CategoryResponse(
                 category.getId(),
                 category.getCode(),
                 category.getName(),
+                category.getDescription(),
                 category.getCreatedAt(),
                 category.getUpdatedAt(),
                 category.getCreatedBy(),
