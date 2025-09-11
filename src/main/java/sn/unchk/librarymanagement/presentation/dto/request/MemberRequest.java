@@ -8,7 +8,7 @@ import sn.unchk.librarymanagement.domain.validation.Create;
 import sn.unchk.librarymanagement.domain.validation.Update;
 
 import static sn.unchk.librarymanagement.constant.GlobalConstant.REQUIRED_FIELD_NAME;
-import static sn.unchk.librarymanagement.domain.exceptions.Pattern.EMAIL;
+import static sn.unchk.librarymanagement.domain.validation.Pattern.EMAIL;
 
 
 @Builder

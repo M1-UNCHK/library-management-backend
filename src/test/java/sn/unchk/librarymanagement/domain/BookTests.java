@@ -3,9 +3,9 @@ package sn.unchk.librarymanagement.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
-import sn.unchk.librarymanagement.domain.models.book.Author;
+import sn.unchk.librarymanagement.domain.models.author.Author;
 import sn.unchk.librarymanagement.domain.models.book.Book;
-import sn.unchk.librarymanagement.domain.models.book.Category;
+import sn.unchk.librarymanagement.domain.models.category.Category;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

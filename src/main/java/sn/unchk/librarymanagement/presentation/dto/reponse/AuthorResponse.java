@@ -1,8 +1,8 @@
 package sn.unchk.librarymanagement.presentation.dto.reponse;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import sn.unchk.librarymanagement.domain.exceptions.Pattern;
-import sn.unchk.librarymanagement.domain.models.book.Author;
+import sn.unchk.librarymanagement.domain.validation.Pattern;
+import sn.unchk.librarymanagement.domain.models.author.Author;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

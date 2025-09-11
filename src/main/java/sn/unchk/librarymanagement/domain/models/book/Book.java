@@ -7,9 +7,10 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
 import sn.unchk.librarymanagement.domain.models.BaseModel;
+import sn.unchk.librarymanagement.domain.models.author.Author;
+import sn.unchk.librarymanagement.domain.models.category.Category;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import static java.util.Objects.isNull;
 
@@ -50,7 +51,6 @@ public class Book extends BaseModel {
                 .author(author)
                 .category(category)
                 .build();
-
     }
 
     public void update(String name, LocalDate publicationDate, Integer stock, Author author, Category category) {
@@ -69,13 +69,15 @@ public class Book extends BaseModel {
             this.category = category;
     }
 
-    public int increaseStock(int stock) {
+    public void increaseStock(int stock) {
         this.stock += stock;
-        return this.stock;
     }
 
-    public int decreaseStock(int stock) {
+    public void decreaseStock(int stock) {
         this.stock -= stock;
-        return this.stock;
+    }
+
+    public boolean hasAvailableStock() {
+        return this.stock > 0;
     }
 }

@@ -1,6 +1,6 @@
 package sn.unchk.librarymanagement.repository;
 
-import sn.unchk.librarymanagement.domain.models.book.Category;
+import sn.unchk.librarymanagement.domain.models.category.Category;
 
 import java.util.UUID;
 

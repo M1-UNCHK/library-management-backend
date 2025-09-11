@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sn.unchk.librarymanagement.domain.exceptions.AlreadyExistsException;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
 import sn.unchk.librarymanagement.domain.exceptions.NotFoundException;
-import sn.unchk.librarymanagement.domain.models.book.Author;
+import sn.unchk.librarymanagement.domain.models.author.Author;
 import sn.unchk.librarymanagement.presentation.dto.reponse.AuthorResponse;
 import sn.unchk.librarymanagement.presentation.dto.request.AuthorRequest;
 import sn.unchk.librarymanagement.repository.AuthorRepository;

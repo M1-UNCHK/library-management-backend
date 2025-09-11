@@ -20,7 +20,6 @@ import static sn.unchk.librarymanagement.constant.GlobalConstant.UPDATED_MESSAGE
 @RestController
 public class BookControllerImpl implements BookController{
     private static final String ENTITY = "Book";
-
     private final BookService bookService;
     private final RequestValidator validator;
 

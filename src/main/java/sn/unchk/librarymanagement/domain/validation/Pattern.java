@@ -1,4 +1,4 @@
-package sn.unchk.librarymanagement.domain.exceptions;
+package sn.unchk.librarymanagement.domain.validation;
 
 public class Pattern {
     public static final String EMAIL = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}$";

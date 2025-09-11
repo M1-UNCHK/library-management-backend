@@ -1,6 +1,6 @@
 package sn.unchk.librarymanagement.repository;
 
-import sn.unchk.librarymanagement.domain.models.book.Author;
+import sn.unchk.librarymanagement.domain.models.author.Author;
 
 import java.util.UUID;
 

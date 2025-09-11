@@ -1,6 +1,6 @@
 package sn.unchk.librarymanagement.service.author;
 
-import sn.unchk.librarymanagement.domain.models.book.Author;
+import sn.unchk.librarymanagement.domain.models.author.Author;
 import sn.unchk.librarymanagement.presentation.dto.reponse.AuthorResponse;
 import sn.unchk.librarymanagement.presentation.dto.request.AuthorRequest;
 

@@ -2,7 +2,7 @@ package sn.unchk.librarymanagement.domain;
 
 import org.junit.jupiter.api.Test;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
-import sn.unchk.librarymanagement.domain.models.book.Author;
+import sn.unchk.librarymanagement.domain.models.author.Author;
 
 import java.time.LocalDate;
 
