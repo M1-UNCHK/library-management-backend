@@ -34,6 +34,6 @@ public interface LoanController {
     @GetMapping("/status")
     ResponseEntity<Page<LoanResponse>> getLoanByStatus(@RequestParam("status")LoanStatus status, Pageable pageable);
 
-    @GetMapping("/current")
+    @GetMapping("/book/current")
     ResponseEntity<Page<LoanResponse>> getCurrentLoansByBook(@RequestParam("bookId") UUID bookId, Pageable pageable);
 }

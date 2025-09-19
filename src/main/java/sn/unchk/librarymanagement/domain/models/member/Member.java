@@ -78,9 +78,17 @@ public abstract class Member extends BaseModel {
         return status == MemberStatus.ACTIVE;
     }
 
+    public boolean isInactive() {
+        return status == MemberStatus.INACTIVE;
+    }
+
     public void changePassword(String password) {
         validateField("password", password);
         this.password = password;
+    }
+
+    public boolean isReader() {
+        return role.equals(MemberRole.READER);
     }
 }
 

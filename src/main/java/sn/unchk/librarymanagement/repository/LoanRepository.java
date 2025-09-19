@@ -13,4 +13,6 @@ public interface LoanRepository extends BaseRepository<Loan> {
     Page<Loan> findAllByStatus(LoanStatus status, Pageable pageable);
 
     Page<Loan> findAllByBookIdAndStatus(UUID bookId, LoanStatus status, Pageable pageable);
+
+    boolean existsByReaderIdAndBookIdAndStatus(UUID readerId, UUID bookId, LoanStatus loanStatus);
 }

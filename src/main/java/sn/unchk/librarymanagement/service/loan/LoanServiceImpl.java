@@ -4,10 +4,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
 import sn.unchk.librarymanagement.domain.exceptions.NotFoundException;
 import sn.unchk.librarymanagement.domain.models.book.Book;
 import sn.unchk.librarymanagement.domain.models.loan.Loan;
 import sn.unchk.librarymanagement.domain.models.loan.LoanStatus;
+import sn.unchk.librarymanagement.domain.models.member.MemberRole;
 import sn.unchk.librarymanagement.domain.models.member.Reader;
 import sn.unchk.librarymanagement.presentation.dto.reponse.LoanResponse;
 import sn.unchk.librarymanagement.presentation.dto.request.AddLoanRequest;
@@ -36,12 +38,25 @@ public class LoanServiceImpl implements LoanService{
         Book book = bookRepository.findById(request.bookId())
                 .orElseThrow(() -> new NotFoundException("bookId", String.format("Book with id %s not found", request.bookId())));
 
-        Reader reader = (Reader) memberRepository.findById(request.readerId())
+        Reader reader = (Reader) memberRepository.findByIdAndRole(request.readerId(), MemberRole.READER)
                 .orElseThrow(() -> new NotFoundException("readerId", String.format("Reader with id %s not found", request.readerId())));
+
+        if (reader.isInactive())
+            throw new MalformedFieldException("readerId", String.format("Reader with id %s is disabled", reader.getId()));
+
+        if (loanRepository.existsByReaderIdAndBookIdAndStatus(
+                request.readerId(),
+                request.bookId(),
+                LoanStatus.IN_PROGRESS)
+        )
+            throw new MalformedFieldException("bookId","Reader has already loan this book");
 
         Loan loan = Loan.addNewLoan(book, reader, request.date());
 
         loanRepository.save(loan);
+
+        book.decreaseStock(1);
+        bookRepository.save(book);
 
         return true;
     }
@@ -54,6 +69,10 @@ public class LoanServiceImpl implements LoanService{
         loan.returnLoan(date);
 
         loanRepository.save(loan);
+
+        Book book = loan.getBook();
+        book.increaseStock(1);
+        bookRepository.save(book);
 
         return true;
     }

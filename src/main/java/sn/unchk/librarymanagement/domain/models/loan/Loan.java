@@ -1,7 +1,6 @@
 package sn.unchk.librarymanagement.domain.models.loan;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,10 +26,13 @@ public class Loan extends BaseModel {
     @ManyToOne(optional = false)
     private Reader reader;
 
+    @Column(nullable = false)
     private LocalDate loanDate;
 
     private LocalDate returnedDate;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private LoanStatus status;
 
     public static Loan addNewLoan(Book book, Reader reader, LocalDate date) {
@@ -52,7 +54,10 @@ public class Loan extends BaseModel {
     }
 
     public void returnLoan(LocalDate date) {
-        this.status = LoanStatus.RETURNED;
+        if(date.isAfter(LocalDate.now()))
+            throw new MalformedFieldException("date", "Returned Date cannot be after today");
+
         this.returnedDate = date;
+        this.status = LoanStatus.RETURNED;
     }
 }
