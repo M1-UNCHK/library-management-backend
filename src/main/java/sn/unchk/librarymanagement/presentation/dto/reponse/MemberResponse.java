@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import sn.unchk.librarymanagement.domain.exceptions.Pattern;
+import sn.unchk.librarymanagement.domain.validation.Pattern;
 import sn.unchk.librarymanagement.domain.models.member.Member;
 import sn.unchk.librarymanagement.domain.models.member.MemberRole;
 import sn.unchk.librarymanagement.domain.models.member.MemberStatus;

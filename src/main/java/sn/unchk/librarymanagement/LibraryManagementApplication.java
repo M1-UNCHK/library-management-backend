@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import sn.unchk.librarymanagement.domain.models.book.Author;
+import sn.unchk.librarymanagement.domain.models.author.Author;
 import sn.unchk.librarymanagement.domain.models.book.Book;
-import sn.unchk.librarymanagement.domain.models.book.Category;
+import sn.unchk.librarymanagement.domain.models.category.Category;
 import sn.unchk.librarymanagement.domain.models.member.MemberRole;
 import sn.unchk.librarymanagement.presentation.dto.request.MemberRequest;
 import sn.unchk.librarymanagement.presentation.security.RsaKeyProperties;
@@ -21,8 +21,6 @@ import sn.unchk.librarymanagement.repository.CategoryRepository;
 import sn.unchk.librarymanagement.service.member.MemberService;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan

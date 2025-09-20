@@ -1,4 +1,4 @@
-package sn.unchk.librarymanagement.domain.models.book;
+package sn.unchk.librarymanagement.domain.models.category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

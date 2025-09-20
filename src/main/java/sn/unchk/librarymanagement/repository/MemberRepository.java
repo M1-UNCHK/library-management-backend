@@ -27,4 +27,6 @@ public interface MemberRepository extends BaseRepository<Member> {
     List<Member> findAllByStatus(MemberStatus status);
 
     List<Member> findAllByRole(MemberRole role);
+
+    Optional<Member> findByIdAndRole(UUID id, MemberRole role);
 }

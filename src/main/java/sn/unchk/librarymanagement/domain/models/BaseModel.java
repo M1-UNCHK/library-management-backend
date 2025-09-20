@@ -13,7 +13,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
-import sn.unchk.librarymanagement.domain.exceptions.Pattern;
+import sn.unchk.librarymanagement.domain.validation.Pattern;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -11,7 +11,7 @@ import sn.unchk.librarymanagement.domain.validation.Create;
 import sn.unchk.librarymanagement.domain.validation.Update;
 
 import static sn.unchk.librarymanagement.constant.GlobalConstant.REQUIRED_FIELD_NAME;
-import static sn.unchk.librarymanagement.domain.exceptions.Pattern.EMAIL;
+import static sn.unchk.librarymanagement.domain.validation.Pattern.EMAIL;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @AllArgsConstructor @NoArgsConstructor
@@ -78,9 +78,17 @@ public abstract class Member extends BaseModel {
         return status == MemberStatus.ACTIVE;
     }
 
+    public boolean isInactive() {
+        return status == MemberStatus.INACTIVE;
+    }
+
     public void changePassword(String password) {
         validateField("password", password);
         this.password = password;
+    }
+
+    public boolean isReader() {
+        return role.equals(MemberRole.READER);
     }
 }
 

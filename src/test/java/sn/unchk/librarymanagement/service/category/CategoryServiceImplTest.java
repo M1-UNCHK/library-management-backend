@@ -10,7 +10,7 @@ import sn.unchk.librarymanagement.domain.exceptions.AlreadyExistsException;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
 import sn.unchk.librarymanagement.domain.exceptions.NotFoundException;
 import sn.unchk.librarymanagement.domain.models.book.Book;
-import sn.unchk.librarymanagement.domain.models.book.Category;
+import sn.unchk.librarymanagement.domain.models.category.Category;
 import sn.unchk.librarymanagement.presentation.dto.reponse.CategoryResponse;
 import sn.unchk.librarymanagement.presentation.dto.request.CategoryRequest;
 import sn.unchk.librarymanagement.repository.BookRepository;

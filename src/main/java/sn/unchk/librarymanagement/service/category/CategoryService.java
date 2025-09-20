@@ -1,6 +1,6 @@
 package sn.unchk.librarymanagement.service.category;
 
-import sn.unchk.librarymanagement.domain.models.book.Category;
+import sn.unchk.librarymanagement.domain.models.category.Category;
 import sn.unchk.librarymanagement.presentation.dto.reponse.CategoryResponse;
 import sn.unchk.librarymanagement.presentation.dto.request.CategoryRequest;
 

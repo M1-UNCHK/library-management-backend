@@ -3,22 +3,18 @@ package sn.unchk.librarymanagement.service.book;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import sn.unchk.librarymanagement.domain.exceptions.AlreadyExistsException;
-import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
 import sn.unchk.librarymanagement.domain.exceptions.NotFoundException;
-import sn.unchk.librarymanagement.domain.models.book.Author;
+import sn.unchk.librarymanagement.domain.models.author.Author;
 import sn.unchk.librarymanagement.domain.models.book.Book;
-import sn.unchk.librarymanagement.domain.models.book.Category;
+import sn.unchk.librarymanagement.domain.models.category.Category;
 import sn.unchk.librarymanagement.presentation.dto.reponse.BookResponse;
 import sn.unchk.librarymanagement.presentation.dto.request.BookRequest;
 import sn.unchk.librarymanagement.repository.AuthorRepository;
 import sn.unchk.librarymanagement.repository.BookRepository;
 import sn.unchk.librarymanagement.repository.CategoryRepository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-
-import static java.util.Objects.isNull;
 
 @Service
 @Transactional

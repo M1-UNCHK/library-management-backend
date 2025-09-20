@@ -1,8 +1,7 @@
 package sn.unchk.librarymanagement.presentation.dto.reponse;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Builder;
-import sn.unchk.librarymanagement.domain.exceptions.Pattern;
+import sn.unchk.librarymanagement.domain.validation.Pattern;
 import sn.unchk.librarymanagement.domain.models.book.Book;
 
 import java.time.LocalDate;
