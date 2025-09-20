@@ -1,5 +1,6 @@
 package sn.unchk.librarymanagement.service.loan;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ import sn.unchk.librarymanagement.domain.models.loan.Loan;
 import sn.unchk.librarymanagement.domain.models.loan.LoanStatus;
 import sn.unchk.librarymanagement.domain.models.member.MemberRole;
 import sn.unchk.librarymanagement.domain.models.member.Reader;
+import sn.unchk.librarymanagement.event.LoanEvent;
+import sn.unchk.librarymanagement.event.EventType;
 import sn.unchk.librarymanagement.presentation.dto.reponse.LoanResponse;
 import sn.unchk.librarymanagement.presentation.dto.request.AddLoanRequest;
 import sn.unchk.librarymanagement.repository.BookRepository;
@@ -26,11 +29,13 @@ public class LoanServiceImpl implements LoanService{
     private final LoanRepository loanRepository;
     private final BookRepository bookRepository;
     private final MemberRepository memberRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public LoanServiceImpl(LoanRepository loanRepository, BookRepository bookRepository, MemberRepository memberRepository) {
+    public LoanServiceImpl(LoanRepository loanRepository, BookRepository bookRepository, MemberRepository memberRepository, ApplicationEventPublisher eventPublisher) {
         this.loanRepository = loanRepository;
         this.bookRepository = bookRepository;
         this.memberRepository = memberRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     @Override
@@ -58,6 +63,8 @@ public class LoanServiceImpl implements LoanService{
         book.decreaseStock(1);
         bookRepository.save(book);
 
+        eventPublisher.publishEvent(new LoanEvent(this, reader.getEmail(), reader.getLastname(), loan, EventType.LOAN_ADDED));
+
         return true;
     }
 
@@ -73,6 +80,8 @@ public class LoanServiceImpl implements LoanService{
         Book book = loan.getBook();
         book.increaseStock(1);
         bookRepository.save(book);
+
+        eventPublisher.publishEvent(new LoanEvent(this, loan.getReader().getEmail(), loan.getReader().getLastname(), loan, EventType.LOAN_RETURNED));
 
         return true;
     }

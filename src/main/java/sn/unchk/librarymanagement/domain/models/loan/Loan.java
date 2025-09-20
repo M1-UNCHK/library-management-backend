@@ -29,11 +29,16 @@ public class Loan extends BaseModel {
     @Column(nullable = false)
     private LocalDate loanDate;
 
+    @Column(nullable = false)
+    private LocalDate dueDate;
+
     private LocalDate returnedDate;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private LoanStatus status;
+
+    private static final int DAY_MATURITY = 20;
 
     public static Loan addNewLoan(Book book, Reader reader, LocalDate date) {
         validateField(book.getId(), "book");
@@ -49,6 +54,7 @@ public class Loan extends BaseModel {
                 .book(book)
                 .reader(reader)
                 .loanDate(date)
+                .dueDate(date.plusDays(DAY_MATURITY))
                 .status(LoanStatus.IN_PROGRESS)
                 .build();
     }

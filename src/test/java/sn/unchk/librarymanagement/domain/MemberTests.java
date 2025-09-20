@@ -132,4 +132,5 @@ public class MemberTests {
 
         assertEquals("oldpassword@123", admin.getPassword());
     }
+
 }

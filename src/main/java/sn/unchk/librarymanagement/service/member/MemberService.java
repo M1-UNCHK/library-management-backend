@@ -14,21 +14,14 @@ import java.util.UUID;
 
 public interface MemberService {
     Member createAdmin(MemberRequest request);
-
     Member createReader(MemberRequest request);
-
     Member updateAdmin(UUID memberId, MemberRequest request);
     Member updateReader(UUID memberId, MemberRequest request);
     void defineNewPassword(UUID memberId, NewPasswordRequest request);
-
     void modifyPassword(UUID memberId, ModifyPasswordRequest request);
-
     void changeStatus(UUID memberId, MemberStatus status);
-
     List<MemberResponse> retrieveAllMembers();
-
     List<MemberResponse> retrieveMemberByStatus(MemberStatus status);
-
     List<MemberResponse> retrieveMemberByRole(MemberRole role);
     MemberResponse retrieveMemberInfoDetails(UUID memberId);
 
