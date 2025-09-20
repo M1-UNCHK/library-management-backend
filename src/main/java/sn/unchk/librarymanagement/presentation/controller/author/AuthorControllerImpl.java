@@ -29,7 +29,6 @@ public class AuthorControllerImpl implements AuthorController {
     }
 
     @Override
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<HttpResponse> addAuthor(AuthorRequest request) {
         validator.assertValidity(request, Create.class);
 
@@ -39,7 +38,6 @@ public class AuthorControllerImpl implements AuthorController {
     }
 
     @Override
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<HttpResponse> updateAuthor(UUID id, AuthorRequest request) {
         validator.assertValidity(request, Update.class);
 
@@ -49,7 +47,6 @@ public class AuthorControllerImpl implements AuthorController {
     }
 
     @Override
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<HttpResponse> deleteAuthor(UUID id) {
         authorService.deleteAuthor(id);
 
@@ -57,13 +54,11 @@ public class AuthorControllerImpl implements AuthorController {
     }
 
     @Override
-    @PreAuthorize("hasAnyAuthority('ADMIN','READER')")
     public ResponseEntity<List<AuthorResponse>> getAllAuthors() {
         return ResponseEntity.ok().body(authorService.retrieveAll());
     }
 
     @Override
-    @PreAuthorize("hasAnyAuthority('ADMIN','READER')")
     public ResponseEntity<AuthorResponse> getAuthorInfo(UUID id) {
         return ResponseEntity.ok().body(authorService.retrieveAuthorInfo(id));
     }

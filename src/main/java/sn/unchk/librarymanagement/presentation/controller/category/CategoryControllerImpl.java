@@ -19,7 +19,6 @@ import static sn.unchk.librarymanagement.constant.GlobalConstant.*;
 @RestController
 public class CategoryControllerImpl implements CategoryController {
     private static final String ENTITY = "Category";
-
     private final CategoryService categoryService;
     private final RequestValidator validator;
 
@@ -29,7 +28,6 @@ public class CategoryControllerImpl implements CategoryController {
     }
 
     @Override
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<HttpResponse> addCategory(CategoryRequest request) {
         validator.assertValidity(request, Create.class);
 
@@ -39,7 +37,6 @@ public class CategoryControllerImpl implements CategoryController {
     }
 
     @Override
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<HttpResponse> updateCategory(UUID categoryId, CategoryRequest request) {
         validator.assertValidity(request, Update.class);
 
@@ -49,7 +46,6 @@ public class CategoryControllerImpl implements CategoryController {
     }
 
     @Override
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<HttpResponse> deleteCategory(UUID categoryId) {
         categoryService.deleteCategory(categoryId);
 
@@ -57,13 +53,11 @@ public class CategoryControllerImpl implements CategoryController {
     }
 
     @Override
-    @PreAuthorize("hasAnyAuthority('ADMIN','READER')")
     public ResponseEntity<List<CategoryResponse>> getAllCategories() {
         return ResponseEntity.ok().body(categoryService.retrieveAll());
     }
 
     @Override
-    @PreAuthorize("hasAnyAuthority('ADMIN','READER')")
     public ResponseEntity<CategoryResponse> getCategoryInfo(UUID categoryId) {
         return ResponseEntity.ok().body(categoryService.retrieveCategoryInfo(categoryId));
     }

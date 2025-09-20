@@ -137,7 +137,7 @@ public class LoanServiceImpl implements LoanService{
     }
 
     @Override
-   // @Scheduled(cron = "0 0 9 * * *") // 9h00 tous les jours
+    @Scheduled(cron = "0 0 9 * * *") // 9h00 tous les jours
     public void remindLoanDueDate() {
         List<Loan> loans = loanRepository.findAllByDueDateBetweenAndStatusAndHasNotifyForRemindFalse(
                 LocalDate.now(),
@@ -160,7 +160,7 @@ public class LoanServiceImpl implements LoanService{
     }
 
     @Override
-  //  @Scheduled(cron = "0 0 8 * * *") // 8h00 tous les jours
+    @Scheduled(cron = "0 0 8 * * *") // 8h00 tous les jours
     public void remindLoanDelay() {
         Member admin = memberRepository.findFirstByRole(MemberRole.ADMIN)
                 .orElseThrow(() -> new NotFoundException("member", "No Administrator found"));
