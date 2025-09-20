@@ -1,6 +1,7 @@
 package sn.unchk.librarymanagement.presentation.controller.book;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import sn.unchk.librarymanagement.domain.validation.Create;
@@ -39,6 +40,7 @@ public class BookControllerImpl implements BookController{
     }
 
     @Override
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<HttpResponse> updateBook(UUID bookId, BookRequest request) {
         validator.assertValidity(request, Update.class);
 

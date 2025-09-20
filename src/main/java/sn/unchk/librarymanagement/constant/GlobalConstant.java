@@ -9,9 +9,6 @@ public class GlobalConstant {
     public static final String UPDATED_STATUS_MESSAGE = "%s status is updated successfully";
     public static final String UPDATED_PASSWORD_MESSAGE = "Member password is updated successfully";
 
-
-    public static final String DEFAULT_PASSWORD = "passer@123";
-
     //Token Constant
     public static final String SCOPE = "scope";
     public static final String USER_EMAIL = "email";
@@ -25,4 +22,10 @@ public class GlobalConstant {
     public static final String AUTHOR_BASE_ROUTE = "/authors";
     public static final String CATEGORY_BASE_ROUTE = "/categories";
     public static final String LOAN_BASE_ROUTE = "/loans";
+    public static final String NOTIFICATION_BASE_ROUTE = "/notifications";
+
+    //Properties
+    public static final String CREATED_AT_PROPERTY = "createdAt";
+    public static final String DEFAULT_PASSWORD = "passer@123";
+
 }

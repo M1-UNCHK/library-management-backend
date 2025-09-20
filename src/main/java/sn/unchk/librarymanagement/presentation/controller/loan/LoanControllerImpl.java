@@ -72,4 +72,19 @@ public class LoanControllerImpl implements LoanController {
     public ResponseEntity<Page<LoanResponse>> getCurrentLoansByBook(UUID bookId, Pageable pageable) {
         return ResponseEntity.ok().body(loanService.retrieveAllCurrentLoansForBook(bookId, pageable));
     }
+
+    @Override
+    public ResponseEntity<?> remindDelay() {
+        loanService.remindLoanDelay();
+
+        return ResponseEntity.ok().body("ok");
+    }
+
+    @Override
+    public ResponseEntity<?> remindDueDate() {
+        loanService.remindLoanDueDate();
+
+        return ResponseEntity.ok().body("ok");
+
+    }
 }

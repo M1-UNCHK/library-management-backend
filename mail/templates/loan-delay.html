@@ -7,14 +7,12 @@
 </head>
 <body>
 <p>Bonjour <strong th:text="${lastname}"></strong>,</p>
-<p>Bienvenue sur l'application UNCHK BIBLI !</p>
-<p>Nous sommes ravis de voir que nos livres vous intéresse.</p>
-<p>Ci dessous les informations du livre emprunté:</p>
+<p>Nous vous rappelons que livre <strong th:text="${bookName}"></strong> a dépassé sa data d'échéance.</p>
+<p>Ci dessous les informations détaillées:</p>
 <p>Nom: <strong th:text="${bookName}"></strong></p>
 <p>Auteur: <strong th:text="${author}"></strong></p>
 <p>Catégorie: <strong th:text="${category}"></strong></p>
-<p><strong>NB:</strong>Vous avez jusqu'au <strong th:text="${dueDate}"></strong> pour retouuner ce livre. Une fois ce délai dépassé des pénalités peuvent s'ajouter.</p>
-<p>Bonne lecture,</p>
+<p><strong>Nous vous prions de bien vouloir vous présenter au bibliothèque pour rendre le livre.</strong></p>
 <p>Cordialement,</p>
 <p><strong>L'&eacute;quipe UNCHK BIBLI.</strong></p>
 </body>

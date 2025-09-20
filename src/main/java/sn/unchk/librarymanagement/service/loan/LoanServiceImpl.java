@@ -2,7 +2,10 @@ package sn.unchk.librarymanagement.service.loan;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
@@ -10,17 +13,22 @@ import sn.unchk.librarymanagement.domain.exceptions.NotFoundException;
 import sn.unchk.librarymanagement.domain.models.book.Book;
 import sn.unchk.librarymanagement.domain.models.loan.Loan;
 import sn.unchk.librarymanagement.domain.models.loan.LoanStatus;
+import sn.unchk.librarymanagement.domain.models.member.Member;
 import sn.unchk.librarymanagement.domain.models.member.MemberRole;
 import sn.unchk.librarymanagement.domain.models.member.Reader;
+import sn.unchk.librarymanagement.domain.models.notification.NotificationType;
 import sn.unchk.librarymanagement.event.LoanEvent;
 import sn.unchk.librarymanagement.event.EventType;
 import sn.unchk.librarymanagement.presentation.dto.reponse.LoanResponse;
 import sn.unchk.librarymanagement.presentation.dto.request.AddLoanRequest;
+import sn.unchk.librarymanagement.presentation.dto.request.NotificationRequest;
 import sn.unchk.librarymanagement.repository.BookRepository;
 import sn.unchk.librarymanagement.repository.LoanRepository;
 import sn.unchk.librarymanagement.repository.MemberRepository;
+import sn.unchk.librarymanagement.service.notification.NotificationService;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,12 +38,14 @@ public class LoanServiceImpl implements LoanService{
     private final BookRepository bookRepository;
     private final MemberRepository memberRepository;
     private final ApplicationEventPublisher eventPublisher;
+    private final NotificationService notificationService;
 
-    public LoanServiceImpl(LoanRepository loanRepository, BookRepository bookRepository, MemberRepository memberRepository, ApplicationEventPublisher eventPublisher) {
+    public LoanServiceImpl(LoanRepository loanRepository, BookRepository bookRepository, MemberRepository memberRepository, ApplicationEventPublisher eventPublisher, NotificationService notificationService) {
         this.loanRepository = loanRepository;
         this.bookRepository = bookRepository;
         this.memberRepository = memberRepository;
         this.eventPublisher = eventPublisher;
+        this.notificationService = notificationService;
     }
 
     @Override
@@ -63,7 +73,12 @@ public class LoanServiceImpl implements LoanService{
         book.decreaseStock(1);
         bookRepository.save(book);
 
-        eventPublisher.publishEvent(new LoanEvent(this, reader.getEmail(), reader.getLastname(), loan, EventType.LOAN_ADDED));
+        eventPublisher.publishEvent(new LoanEvent(
+                this,
+                reader.getEmail(),
+                reader.getLastname(),
+                loan,
+                EventType.LOAN_ADDED));
 
         return true;
     }
@@ -81,7 +96,11 @@ public class LoanServiceImpl implements LoanService{
         book.increaseStock(1);
         bookRepository.save(book);
 
-        eventPublisher.publishEvent(new LoanEvent(this, loan.getReader().getEmail(), loan.getReader().getLastname(), loan, EventType.LOAN_RETURNED));
+        eventPublisher.publishEvent(new LoanEvent(
+                this,
+                loan.getReader().getEmail(),
+                loan.getReader().getLastname(),
+                loan, EventType.LOAN_RETURNED));
 
         return true;
     }
@@ -116,4 +135,62 @@ public class LoanServiceImpl implements LoanService{
         return loanRepository.findAllByBookIdAndStatus(bookId, LoanStatus.IN_PROGRESS, pageable)
                 .map(LoanResponse::of);
     }
+
+    @Override
+    @Scheduled(cron = "0 0 9 * * *") // 9h00 tous les jours
+    public void remindLoanDueDate() {
+        List<Loan> loans = loanRepository.findAllByDueDateBetweenAndStatusAndHasNotifyForRemindFalse(
+                LocalDate.now(),
+                LocalDate.now().plusDays(Loan.REMIND_DAY),
+                LoanStatus.IN_PROGRESS);
+
+        if (loans.isEmpty())
+            return;
+        loans.forEach(loan -> {
+            eventPublisher.publishEvent(new LoanEvent(
+                    this,
+                    loan.getReader().getEmail(),
+                    loan.getReader().getLastname(),
+                    loan, EventType.LOAN_DUE_DATE));
+
+            loan.setHasNotifyForRemind(true);
+
+            loanRepository.save(loan);
+        });
+    }
+
+    @Override
+    @Scheduled(cron = "0 0 8 * * *") // 8h00 tous les jours
+    public void remindLoanDelay() {
+        Member admin = memberRepository.findFirstByRole(MemberRole.ADMIN)
+                .orElseThrow(() -> new NotFoundException("member", "No Administrator found"));
+
+        List<Loan> loans = loanRepository.findAllByDueDateBeforeAndStatusAndHasNotifyForDelayFalse(
+                LocalDate.now(),
+                LoanStatus.IN_PROGRESS);
+
+        if (loans.isEmpty())
+            return;
+
+        loans.forEach(loan -> {
+            NotificationRequest notificationRequest = new NotificationRequest(
+                    "Livre à date échéance",
+                    String.format("L'emprunt du livre %s a dépassé sa date d'échéance", loan.getBook().getName()),
+                    admin.getId(),
+                    NotificationType.LOAN_DUE_DATE
+            );
+            notificationService.save(notificationRequest);
+
+            loan.setHasNotifyForDelay(true);
+
+            eventPublisher.publishEvent(new LoanEvent(
+                    this,
+                    loan.getReader().getEmail(),
+                    loan.getReader().getLastname(),
+                    loan, EventType.LOAN_DELAY));
+
+            loanRepository.save(loan);
+        });
+    }
+
 }

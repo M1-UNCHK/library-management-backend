@@ -1,7 +1,9 @@
 package sn.unchk.librarymanagement.service.book;
 
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import sn.unchk.librarymanagement.constant.GlobalConstant;
 import sn.unchk.librarymanagement.domain.exceptions.AlreadyExistsException;
 import sn.unchk.librarymanagement.domain.exceptions.NotFoundException;
 import sn.unchk.librarymanagement.domain.models.author.Author;
@@ -72,7 +74,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<BookResponse> retrieveAll() {
-        List<Book> books = bookRepository.findAll();
+        List<Book> books = bookRepository.findAll(Sort.by(Sort.Order.desc(GlobalConstant.CREATED_AT_PROPERTY)));
 
         return books.stream().map(BookResponse::of).toList();
     }

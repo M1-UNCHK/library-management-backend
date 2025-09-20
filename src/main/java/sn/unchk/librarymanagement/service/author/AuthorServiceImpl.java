@@ -1,7 +1,9 @@
 package sn.unchk.librarymanagement.service.author;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sn.unchk.librarymanagement.constant.GlobalConstant;
 import sn.unchk.librarymanagement.domain.exceptions.AlreadyExistsException;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
 import sn.unchk.librarymanagement.domain.exceptions.NotFoundException;
@@ -72,7 +74,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<AuthorResponse> retrieveAll() {
-        return authorRepository.findAll()
+        return authorRepository.findAll(Sort.by(Sort.Order.desc(GlobalConstant.CREATED_AT_PROPERTY)))
                 .stream()
                 .map(AuthorResponse::of)
                 .toList();
