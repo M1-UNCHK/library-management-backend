@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="FR-fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="${subject}"></title>
+</head>
+<body>
+<p>Bienvenue <strong th:text="${username}"></strong> sur l'application UNCHK BIBLI !</p>
+<p>Nous sommes ravis de voir que nos livres vous intéresse.</p>
+<p>Ci dessous les du livre emprunter :</p>
+<p>Nom: <strong th:text="${bookName}"></strong></p>
+<p>Auteur: <strong th:text="${author}"></strong></p>
+<p>Catégorie: <strong th:text="${category}"></strong></p>
+<p><strong>NB:</strong>Vous avez jusqu'au <strong th:text="${dueDate}"></strong> pour retouuner ce livre. Une fois ce délais dépassé des pénalités peuvent s'ajouter.</p>
+<p>Bonne lecture,</p>
+<p>Cordialement,</p>
+<p><strong>L'&eacute;quipe UNCHK BIBLI.</strong></p>
+</body>
+</html>

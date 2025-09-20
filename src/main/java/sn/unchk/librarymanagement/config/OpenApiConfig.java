@@ -17,7 +17,7 @@ import java.util.List;
 @Configuration
 @OpenAPIDefinition(info = @Info(title = "Library Management REST API", version = "1.0",
         description = "Library Management REST API Documentation ...",
-        contact = @Contact(name = "Talents Consulting", email = "developer@talentsconsult.com")),
+        contact = @Contact(name = "Group6 UNCHK", email = "developer@group6unchk.com")),
         security = {@SecurityRequirement(name = "BearerToken")}
 )
 

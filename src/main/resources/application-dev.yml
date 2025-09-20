@@ -17,6 +17,43 @@ spring:
   banner:
     location: banner
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rootsn221@gmail.com
+    password: kzkv rusi wvdi bpyy
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+#  mail:
+#    host: smtp.office365.com
+#    port: 587
+#    username: helpdesk@talentsconsult.com
+#    password: H3lpT@lent20!
+#    properties:
+#      mail:
+#        debug: true
+#        smtp:
+#          ssl:
+#            trust: smtp.office365.com
+#            enable: false
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+#    test-connection: true
+
+  thymeleaf:
+    prefix: file:C:\Users\Mouhamad\Documents\Projects\library-management\mail\templates\
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
+    cache: false
+
+
 security:
   rsa:
     public-key: classpath:certificates/public.pem
@@ -41,3 +78,10 @@ security:
 
 application:
   url: http://localhost:${server.port}
+
+resilience4j:
+  retry:
+    instances:
+      notificationEmailMember:
+        max-attempts: 5
+        wait-duration: 10m

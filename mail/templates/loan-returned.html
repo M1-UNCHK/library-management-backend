@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="FR-fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="${subject}"></title>
+</head>
+<body>
+<p>Bienvenue <strong th:text="${lastname}"></strong> sur l'application UNCHK BIBLI !</p>
+<p>Nous sommes ravis de voir que vous avez retourné le livre.</p>
+<p>Ci dessous les informations du livre retourné :</p>
+<p>Nom: <strong th:text="${bookName}"></strong></p>
+<p>Auteur: <strong th:text="${author}"></strong></p>
+<p>Catégorie: <strong th:text="${category}"></strong></p>
+<p>Date de retour: <strong th:text="${returnedDate}"></strong></p><br>
+<p>Date d'échéance: <strong th:text="${dueDate}"></strong></p>
+<p>Cordialement,</p>
+<p><strong>L'&eacute;quipe UNCHK BIBLI.</strong></p>
+</body>
+</html>

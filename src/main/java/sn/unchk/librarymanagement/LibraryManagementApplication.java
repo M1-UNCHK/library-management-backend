@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import sn.unchk.librarymanagement.config.EmailConfigProperties;
 import sn.unchk.librarymanagement.domain.models.author.Author;
 import sn.unchk.librarymanagement.domain.models.book.Book;
 import sn.unchk.librarymanagement.domain.models.category.Category;
@@ -24,7 +25,7 @@ import java.time.LocalDate;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
-@EnableConfigurationProperties({RsaKeyProperties.class, TokenProperties.class, SecurityConfigProperties.class})
+@EnableConfigurationProperties({RsaKeyProperties.class, TokenProperties.class, SecurityConfigProperties.class, EmailConfigProperties.class})
 @Slf4j
 public class LibraryManagementApplication {
     public static final String ADMIN_USERNAME = "diack";

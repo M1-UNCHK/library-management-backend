@@ -14,6 +14,8 @@ public record LoanResponse(
         BookResponse book,
         MemberResponse reader,
         LocalDate loanDate,
+
+        LocalDate dueDate,
         LocalDate returnedDate,
         LoanStatus status,
         @JsonFormat(pattern = Pattern.DATE)
@@ -30,6 +32,7 @@ public record LoanResponse(
                 BookResponse.of(loan.getBook()),
                 MemberResponse.of(loan.getReader()),
                 loan.getLoanDate(),
+                loan.getDueDate(),
                 loan.getReturnedDate(),
                 loan.getStatus(),
                 loan.getCreatedAt(),
