@@ -28,23 +28,6 @@ spring:
           auth: true
           starttls:
             enable: true
-#  mail:
-#    host: smtp.office365.com
-#    port: 587
-#    username: helpdesk@talentsconsult.com
-#    password: H3lpT@lent20!
-#    properties:
-#      mail:
-#        debug: true
-#        smtp:
-#          ssl:
-#            trust: smtp.office365.com
-#            enable: false
-#          auth: true
-#          starttls:
-#            enable: true
-#            required: true
-#    test-connection: true
 
   thymeleaf:
     prefix: file:C:\Users\Mouhamad\Documents\Projects\library-management\mail\templates\

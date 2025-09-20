@@ -1,6 +1,7 @@
 package sn.unchk.librarymanagement.domain.models.loan;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +11,12 @@ import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
 import sn.unchk.librarymanagement.domain.models.BaseModel;
 import sn.unchk.librarymanagement.domain.models.book.Book;
 import sn.unchk.librarymanagement.domain.models.member.Reader;
+import sn.unchk.librarymanagement.domain.validation.Create;
+import sn.unchk.librarymanagement.domain.validation.Update;
 
 import java.time.LocalDate;
+
+import static sn.unchk.librarymanagement.constant.GlobalConstant.REQUIRED_FIELD_NAME;
 
 @Entity
 @AllArgsConstructor
@@ -21,24 +26,34 @@ import java.time.LocalDate;
 @SuperBuilder
 public class Loan extends BaseModel {
     @ManyToOne(optional = false)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private Book book;
 
     @ManyToOne(optional = false)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private Reader reader;
 
     @Column(nullable = false)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private LocalDate loanDate;
 
     @Column(nullable = false)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private LocalDate dueDate;
 
     private LocalDate returnedDate;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private LoanStatus status;
 
+    private boolean hasNotifyForRemind;
+
+    private boolean hasNotifyForDelay;
+
     private static final int DAY_MATURITY = 20;
+    public static final int REMIND_DAY = 3;
 
     public static Loan addNewLoan(Book book, Reader reader, LocalDate date) {
         validateField(book.getId(), "book");

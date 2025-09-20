@@ -1,7 +1,9 @@
 package sn.unchk.librarymanagement.service.category;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sn.unchk.librarymanagement.constant.GlobalConstant;
 import sn.unchk.librarymanagement.domain.exceptions.AlreadyExistsException;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
 import sn.unchk.librarymanagement.domain.exceptions.NotFoundException;
@@ -73,7 +75,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryResponse> retrieveAll() {
-        return categoryRepository.findAll()
+        return categoryRepository.findAll(Sort.by(Sort.Order.desc(GlobalConstant.CREATED_AT_PROPERTY)))
                 .stream()
                 .map(CategoryResponse::of)
                 .toList();

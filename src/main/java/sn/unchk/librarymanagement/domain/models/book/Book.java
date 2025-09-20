@@ -3,16 +3,20 @@ package sn.unchk.librarymanagement.domain.models.book;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import sn.unchk.librarymanagement.domain.exceptions.MalformedFieldException;
 import sn.unchk.librarymanagement.domain.models.BaseModel;
 import sn.unchk.librarymanagement.domain.models.author.Author;
 import sn.unchk.librarymanagement.domain.models.category.Category;
+import sn.unchk.librarymanagement.domain.validation.Create;
+import sn.unchk.librarymanagement.domain.validation.Update;
 
 import java.time.LocalDate;
 
 import static java.util.Objects.isNull;
+import static sn.unchk.librarymanagement.constant.GlobalConstant.REQUIRED_FIELD_NAME;
 
 @Entity
 @AllArgsConstructor
@@ -22,17 +26,21 @@ import static java.util.Objects.isNull;
 @SuperBuilder
 public class Book extends BaseModel {
     @Column(nullable = false, unique = true)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private String name;
 
     private LocalDate publicationDate;
 
     @Column(nullable = false)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private int stock;
 
     @ManyToOne(optional = false)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private Author author;
 
     @ManyToOne(optional = false)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private Category category;
 
     public static Book add(String name, LocalDate publicationDate, int stock, Author author, Category category) {

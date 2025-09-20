@@ -17,4 +17,8 @@ public interface LoanService {
     Page<LoanResponse> retrieveAllByReader(UUID readerId, Pageable pageable);
     Page<LoanResponse> retrieveAllByStatus(LoanStatus status, Pageable pageable);
     Page<LoanResponse> retrieveAllCurrentLoansForBook(UUID bookId, Pageable pageable);
+
+    void remindLoanDueDate();
+
+    void remindLoanDelay();
 }

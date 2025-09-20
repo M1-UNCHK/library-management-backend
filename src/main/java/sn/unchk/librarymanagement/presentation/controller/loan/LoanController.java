@@ -36,4 +36,10 @@ public interface LoanController {
 
     @GetMapping("/book/current")
     ResponseEntity<Page<LoanResponse>> getCurrentLoansByBook(@RequestParam("bookId") UUID bookId, Pageable pageable);
+
+    @PostMapping("/delay")
+    ResponseEntity<?> remindDelay();
+
+    @PostMapping("/due-date")
+    ResponseEntity<?> remindDueDate();
 }

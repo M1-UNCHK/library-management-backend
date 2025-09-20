@@ -2,11 +2,15 @@ package sn.unchk.librarymanagement.domain.models.category;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import sn.unchk.librarymanagement.domain.models.BaseModel;
+import sn.unchk.librarymanagement.domain.validation.Create;
+import sn.unchk.librarymanagement.domain.validation.Update;
 
 import static java.util.Objects.isNull;
+import static sn.unchk.librarymanagement.constant.GlobalConstant.REQUIRED_FIELD_NAME;
 
 @Entity
 @AllArgsConstructor
@@ -16,9 +20,11 @@ import static java.util.Objects.isNull;
 @SuperBuilder
 public class Category extends BaseModel {
     @Column(nullable = false, unique = true)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private String code;
 
     @Column(nullable = false, unique = true)
+    @NotNull(message = REQUIRED_FIELD_NAME, groups = { Create.class, Update.class })
     private String name;
 
     @Column(length = 10000)
