@@ -43,7 +43,7 @@ public class LibraryManagementApplication {
         SpringApplication app = new SpringApplication(LibraryManagementApplication.class);
         Map<String, Object> props = new HashMap<>();
         String port = System.getenv("PORT");
-        props.put("server.port", port != null ? port : "8080");
+        props.put("server.port", port != null ? port : "9090");
         log.info("SERVER PORT {}::::", port);
         log.info("PROPS {}::::", props);
         app.setDefaultProperties(props);
