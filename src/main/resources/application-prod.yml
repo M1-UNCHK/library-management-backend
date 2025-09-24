@@ -51,4 +51,4 @@ security:
 
 
 application:
-  url: http://library-management-backend-production-c80b.up.railway.app:${server.port}
+  url: http://library-management-backend-production-c80b.up.railway.app
