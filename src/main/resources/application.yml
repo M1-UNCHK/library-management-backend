@@ -34,5 +34,3 @@ resilience4j:
         max-attempts: 5
         wait-duration: 10m
 
-application:
-  url: http://localhost:${server.port}

@@ -49,3 +49,6 @@ security:
       - PATCH
       - OPTIONS
 
+
+application:
+  url: http://library-management-backend-production-c80b.up.railway.app:${server.port}
