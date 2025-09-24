@@ -14,9 +14,25 @@ spring:
 security:
   url:
     authorized: /oauth/login, /actuator, /actuator/**, /v3/api-docs/**, /v3/api-docs.yaml, /swagger-ui/**, /swagger-ui.html
+  rsa:
+    public-key: classpath:certificates/public.pem
+    private-key: classpath:certificates/private.pem
+  token:
+    issuer: LMA Authentication & Authorization
+    delay: 1
 
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
   api-docs:
     path: /v3/api-docs
+
+resilience4j:
+  retry:
+    instances:
+      notificationEmailMember:
+        max-attempts: 5
+        wait-duration: 10m
+
+application:
+  url: http://localhost:${server.port}

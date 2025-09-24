@@ -40,9 +40,6 @@ public class Author extends BaseModel {
         validateField(dateOfBirth, "dateOfBirth");
         validateField(biography, "biography");
 
-        if (dateOfBirth.isAfter(LocalDate.now()))
-            throw new MalformedFieldException("dateOfBirth", "Date of birth cannot be in the future");
-
         return Author.builder()
                 .name(name)
                 .dateOfBirth(dateOfBirth)

@@ -1,6 +1,7 @@
 package sn.unchk.librarymanagement;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,8 @@ import sn.unchk.librarymanagement.repository.CategoryRepository;
 import sn.unchk.librarymanagement.service.member.MemberService;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
@@ -35,8 +38,16 @@ public class LibraryManagementApplication {
     public static final String READER_PASSWORD = "beni@123";
     public static final String READER_EMAIL = "djongnabeb@gmail.com";
 
+
     public static void main(String[] args) {
-        SpringApplication.run(LibraryManagementApplication.class, args);
+        SpringApplication app = new SpringApplication(LibraryManagementApplication.class);
+        Map<String, Object> props = new HashMap<>();
+        String port = System.getenv("PORT");
+        props.put("server.port", port != null ? port : "8080");
+        log.info("SERVER PORT {}::::", port);
+        log.info("PROPS {}::::", props);
+        app.setDefaultProperties(props);
+        app.run(args);
     }
     @Bean
     CommandLineRunner runner(MemberService memberService,

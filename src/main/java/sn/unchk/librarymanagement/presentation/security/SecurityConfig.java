@@ -83,10 +83,9 @@ public class SecurityConfig {
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        // Lire le claim "scope" et enlever le préfixe par défaut
         JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        authoritiesConverter.setAuthoritiesClaimName("scope"); // ex: "ADMIN"
-        authoritiesConverter.setAuthorityPrefix("");           // pas "SCOPE_"
+        authoritiesConverter.setAuthoritiesClaimName("scope");
+        authoritiesConverter.setAuthorityPrefix("");
 
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
         converter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
@@ -109,8 +108,10 @@ public class SecurityConfig {
     }
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
+        String frontUrl = System.getenv("FRONT_URL");
+
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(securityConfigProperties.getCors().getAllowedOrigins());
+        configuration.setAllowedOrigins((frontUrl != null ? List.of(frontUrl) : securityConfigProperties.getCors().getAllowedOrigins()));
         configuration.setAllowedMethods(securityConfigProperties.getCors().getAllowedMethods());
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

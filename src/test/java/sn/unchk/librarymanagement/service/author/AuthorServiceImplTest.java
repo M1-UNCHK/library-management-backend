@@ -75,6 +75,7 @@ class AuthorServiceImplTest {
         // Then
         assertNotNull(result);
         assertEquals(existingAuthor.getName(), result.getName());
+        assertEquals(existingAuthor.getDateOfBirth(), result.getDateOfBirth());
         verify(authorRepository).existsByName(validAuthorRequest.getName());
         verify(authorRepository).save(any(Author.class));
     }
