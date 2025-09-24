@@ -8,13 +8,11 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${JDBC_DATABASE_URL}
-#    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}?sslmode=require
-#    username: ${PGUSER}
-#    password: ${PGPASSWORD}
+    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}?sslmode=require
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
     hikari:
       auto-commit: false
-
 
 security:
   cors:
