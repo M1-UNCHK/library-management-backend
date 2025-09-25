@@ -8,9 +8,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}?sslmode=require
-    username: ${PGUSER}
-    password: ${PGPASSWORD}
+#    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}?sslmode=require
+#    username: ${PGUSER}
+#    password: ${PGPASSWORD}
     hikari:
       auto-commit: false
 
@@ -39,8 +39,8 @@ spring:
 security:
   cors:
     allowed-origins:
-      - "*"
       - http://localhost:4200
+      - http://51.83.71.17:4200
     allowed-methods:
       - GET
       - POST
@@ -49,6 +49,5 @@ security:
       - PATCH
       - OPTIONS
 
-
 application:
-  url: http://library-management-backend-production-c80b.up.railway.app
+  url: http://51.83.71.17:${server.port}

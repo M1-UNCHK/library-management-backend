@@ -30,7 +30,7 @@ public class Admin extends Member {
                 .address(admin.getAddress())
                 .role(MemberRole.ADMIN)
                 .password(admin.getPassword())
-                .status(MemberStatus.PENDING)
+                .status(MemberStatus.ACTIVE)
                 .build();
     }
 }
