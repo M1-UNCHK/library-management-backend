@@ -27,7 +27,6 @@ public class MemberServiceImpl implements MemberService {
     private final RequestValidator validator;
     private final PasswordEncoder passwordEncoder;
 
-
     public MemberServiceImpl(MemberRepository memberRepository, RequestValidator validator, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.validator = validator;

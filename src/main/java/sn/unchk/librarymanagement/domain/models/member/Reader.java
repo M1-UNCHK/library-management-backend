@@ -28,7 +28,7 @@ public class Reader extends Member{
                 .address(reader.getAddress())
                 .role(MemberRole.READER)
                 .password(reader.getPassword())
-                .status(MemberStatus.PENDING)
+                .status(MemberStatus.ACTIVE)
                 .build();
     }
 }
