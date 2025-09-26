@@ -123,19 +123,10 @@ cd library-management
 
 Développé par le Groupe 6 UNCHM :
 
-![Mouhamad DIACK](https://github.com/Mouhamed-git)</span>
-![Makhtar Saré](https://github.com/mathi0u)</span>
+![Mouhamad DIACK](https://github.com/Mouhamed-git)
+![Makhtar Saré](https://github.com/mathi0u)
 ![Beni Djongnabe](https://github.com/supervaiki)
-![Ngoné Ndiaye](https://github.com)</span>
-
-
-
-
-Makhtar Saré - GitHub
-
-Ngoné Ndiaye - GitHub
-
-Béni - GitHub
+![Ngoné Ndiaye](https://github.com)
 
 ## 📄 Licence
 Ce projet est sous licence MIT - voir le fichier LICENSE
