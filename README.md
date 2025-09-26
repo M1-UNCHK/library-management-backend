@@ -1,9 +1,9 @@
 # 📚 Library Management
 
 
-![Build](https://img.shields.io/github/actions/workflow/status/votre-utilisateur/library-management/maven.yml?branch=main)
-![Coverage](https://img.shields.io/codecov/c/github/votre-utilisateur/library-management)
-![License](https://img.shields.io/github/license/votre-utilisateur/library-management)
+![Build](https://img.shields.io/github/actions/workflow/status/M1-UNCHK/library-management-backend/maven.yml?branch=main)
+![Coverage](https://img.shields.io/codecov/c/github/M1-UNCHK/library-management-backend)
+![License](https://img.shields.io/github/license/M1-UNCHK/library-management-backend)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.4-brightgreen)
 
 Une application web de gestion de bibliothèque développée avec **Spring Boot 3.5.4**. Elle permet aux bibliothèques de gérer les livres, les auteurs et les emprunts. Les administrateurs peuvent ajouter, modifier ou supprimer des livres et des auteurs, tandis que les utilisateurs peuvent emprunter des ouvrages.
@@ -24,42 +24,42 @@ Une application web de gestion de bibliothèque développée avec **Spring Boot 
 
 Le projet suit une architecture modulaire et bien organisée :
 
-
+```bash
 src/
-├── main/
-│ ├── java/sn.unchk.librarymanagement/
-│ │ ├── config/
-│ │ ├── constant/
-│ │ ├── domain/
-│ │ ├── exceptions/
-│ │ ├── models/
-│ │ ├── validation/
-│ │ ├── event/
-│ │ ├── presentation/
-│ │ │ ├── controller/
-│ │ │ ├── dto/
-│ │ │ ├── exceptions/
-│ │ │ ├── security/
-│ │ │ ├── validation/
-│ │ ├── repository/
-│ │ ├── service/
-│ │ └── LibraryManagementApplication.java
-│ └── resources/
-│ ├── certificates/
-│ ├── mail.templates/
-│ ├── static/
-│ ├── templates/
-│ ├── application.yml
-│ ├── application-dev.yml
-│ ├── application-prod.yml
-│ └── banner
-└── test/
-└── java/sn.unchk.librarymanagement/
-├── config/
-├── controller/
-├── domain/
-└── service/
-
+├── main
+│   ├── java/sn.unchk.librarymanagement
+│   │   ├── config
+│   │   ├── constant
+│   │   ├── domain
+│   │   ├── exceptions
+│   │   ├── models
+│   │   ├── validation
+│   │   ├── event
+│   │   ├── presentation
+│   │   │   ├── controller
+│   │   │   ├── dto
+│   │   │   ├── exceptions
+│   │   │   ├── security
+│   │   │   └── validation
+│   │   ├── repository
+│   │   ├── service
+│   │   └── LibraryManagementApplication.java
+│   └── resources
+│       ├── certificates
+│       ├── mail.templates
+│       ├── static
+│       ├── templates
+│       ├── application.yml
+│       ├── application-dev.yml
+│       ├── application-prod.yml
+│       └── banner
+└── test
+└── java/sn.unchk.librarymanagement
+├── config
+├── controller
+├── domain
+└── service
+```
 
 ## 🛠️ Technologies
 
