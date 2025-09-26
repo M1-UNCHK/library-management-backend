@@ -123,7 +123,13 @@ cd library-management
 
 Développé par le Groupe 6 UNCHM :
 
-Mouhamad DIACK - GitHub
+![Mouhamad DIACK](https://github.com/Mouhamed-git)</span>
+![Makhtar Saré](https://github.com/mathi0u)</span>
+![Beni Djongnabe](https://github.com/supervaiki)
+![Ngoné Ndiaye](https://github.com)</span>
+
+
+
 
 Makhtar Saré - GitHub
 
