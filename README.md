@@ -90,10 +90,7 @@ docker run -p 9090:9090 library-management-api
 
 ## 📄 API Documentation :
 ```bash
-En local : http://localhost:9090/swagger-ui.html
-```
-```bash
-En prod : http://51.83.71.17:9090/swagger-ui.html
+ http://localhost:9090/swagger-ui.html
 ```
 
 ## 🧪 Tests
