@@ -30,6 +30,7 @@ public class TokenServiceImpl implements TokenService {
                 .issuedAt(instant)
                 .expiresAt(instant.plus(tokenProperties.delay(), ChronoUnit.DAYS))
                 .subject(memberInfo.getUsername())
+                .claim(ID, memberInfo.getId())
                 .claim(SCOPE, memberInfo.getRole())
                 .claim(USER_EMAIL, memberInfo.getEmail())
                 .build();

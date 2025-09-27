@@ -12,8 +12,9 @@ public class GlobalConstant {
     //Token Constant
     public static final String SCOPE = "scope";
     public static final String USER_EMAIL = "email";
-    public static final String USER_ROLE = "role";
     public static final String ACCESS_TOKEN = "access_token";
+
+    public static final String ID = "uuid";
 
     //Base Route Constant
     public static final String AUTH_BASE_ROUTE = "/oauth";
